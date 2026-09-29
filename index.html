@@ -1,27 +1,499 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-<title>محمد خالد للشروحات صيانه تهكير 07714434273</title>
-<link rel="stylesheet" href="../style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dev Ali Osama / Host Manager</title>
+    <style>
+        :root {
+            --neon-blue: #00f0ff;
+            --ps-blue: #0070d1;
+            --neon-glow: rgba(0, 240, 255, 0.4);
+            --bg-dark: #05070d;
+            --card-bg: rgba(10, 15, 29, 0.85);
+            --border-line: rgba(0, 240, 255, 0.25);
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --warning: #ffb703;
+            --danger: #ff0055;
+            --success: #00ff88;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans Arabic', sans-serif;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 10%, rgba(0, 112, 209, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 50% 90%, rgba(0, 240, 255, 0.1) 0%, transparent 60%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 15px;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        .hud-container {
+            width: 100%;
+            max-width: 760px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-line);
+            border-radius: 24px;
+            padding: 35px 25px;
+            position: relative;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.85),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 0 25px rgba(0, 240, 255, 0.15);
+            text-align: center;
+        }
+
+        .hud-container::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: 50px; right: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        header, .site-header {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            margin: 0 0 20px 0 !important;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-frame {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-frame::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px dashed rgba(0, 240, 255, 0.6);
+            animation: rotateRing 15s linear infinite;
+        }
+
+        @keyframes rotateRing {
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-logo {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-glow);
+            z-index: 2;
+        }
+
+        .main-title {
+            font-size: 1.9rem;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            color: #ffffff !important;
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+            margin-bottom: 8px;
+        }
+
+        .sub-tagline {
+            font-size: 0.8rem;
+            color: var(--text-sub) !important;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-weight: 600;
+            direction: ltr;
+        }
+
+        .dev-badge-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .dev-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(90deg, rgba(0, 112, 209, 0.3), rgba(0, 240, 255, 0.3)) !important;
+            border: 1px solid var(--neon-blue) !important;
+            padding: 8px 22px;
+            border-radius: 50px;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+        }
+
+        .dev-badge a {
+            color: #ffffff !important;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+            direction: ltr;
+        }
+
+        .dev-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--neon-blue);
+        }
+
+        .visitor-dock {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(3, 7, 18, 0.7);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            border-radius: 16px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.05);
+        }
+
+        .visitor-dock::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .visitor-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: right;
+        }
+
+        .radar-box {
+            position: relative;
+            width: 38px;
+            height: 38px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .radar-pulse {
+            width: 10px;
+            height: 10px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-blue);
+            animation: pulseGlow 1.8s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.9); box-shadow: 0 0 5px var(--neon-blue); }
+            50% { transform: scale(1.3); box-shadow: 0 0 15px var(--neon-blue); }
+            100% { transform: scale(0.9); box-shadow: 0 0 5px var(--neon-blue); }
+        }
+
+        .visitor-titles {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visitor-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .visitor-sub {
+            font-size: 0.72rem;
+            color: var(--text-sub);
+            font-family: monospace;
+            direction: ltr;
+            text-align: right;
+        }
+
+        .visitor-stats {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            direction: ltr;
+        }
+
+        #visitor-count {
+            font-size: 1.5rem;
+            font-weight: 900;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: var(--neon-blue);
+            text-shadow: 0 0 12px var(--neon-glow);
+            letter-spacing: 2px;
+        }
+
+        .visitor-unit {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .telemetry-box {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            background: rgba(3, 7, 18, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        #UA {
+            font-size: 0.85rem;
+            color: #38bdf8;
+            font-family: 'Courier New', Courier, monospace;
+            direction: ltr;
+            letter-spacing: 0.5px;
+            word-break: break-all;
+        }
+
+        #det {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            font-family: monospace;
+            direction: ltr;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 10px;
+        }
+
+        #det b {
+            color: var(--neon-blue);
+        }
+
+        .action-dock {
+            margin: 15px 0;
+        }
+
+        #msgs {
+            width: 100%;
+            padding: 22px 15px;
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: linear-gradient(180deg, #111827 0%, #0b0f19 100%);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+            display: block;
+        }
+
+        #msgs::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 12px var(--neon-blue);
+        }
+
+        .hud-footer {
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #475569;
+            direction: ltr;
+        }
+
+        .controller-hint {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+
+        .controller-hint span {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 1px solid var(--neon-blue);
+            border-radius: 50%;
+            line-height: 16px;
+            text-align: center;
+            font-size: 0.7rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-title { font-size: 1.4rem; }
+            .hud-container { padding: 25px 15px; }
+            #msgs { font-size: 1rem; padding: 16px 10px; }
+            .hud-footer { flex-direction: column; gap: 10px; }
+        }
+    </style>
 </head>
 <body>
+
+    <div class="hud-container">
+        <header class="site-header">
+            <div class="header-content">
+                <div class="logo-frame">
+                    <img src="logo.jpg" alt="Dev Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('.logo-frame').style.display='none';">
+                </div>
+
+                <h1 class="main-title">المطور علي أسامة</h1>
+                <p class="sub-tagline">Multi-Firmware Architecture (5.05 - 13.52)</p>
+
+                <div class="dev-badge-wrapper">
+                    <div class="dev-badge">
+                        <div class="dot"></div>
+                        <a href="https://t.me/BBTBB" target="_blank">DEV : @BBTBB</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- عداد الزيارات المتطور -->
+        <div class="visitor-dock">
+            <div class="visitor-meta">
+                <div class="radar-box">
+                    <div class="radar-pulse"></div>
+                </div>
+                <div class="visitor-titles">
+                    <span class="visitor-title">إجمالي الزيارات</span>
+                    <span class="visitor-sub">TOTAL VISITS COUNTER</span>
+                </div>
+            </div>
+            <div class="visitor-stats">
+                <span id="visitor-count">50</span>
+                <span class="visitor-unit">HITS</span>
+            </div>
+        </div>
+
+        <!-- صندوق معلومات المتصفح والبيئة -->
+        <div class="telemetry-box">
+            <div id="UA">Detecting system environment...</div>
+            <div id="det">Awaiting telemetry...</div>
+        </div>
+
+        <!-- صندوق عرض الحالة والرسائل -->
+        <div class="action-dock">
+            <h1 id="msgs">Loading System Core... Please Wait</h1>
+        </div>
+
+        <footer class="hud-footer">
+            <div>HOST CORE v13.52 &middot; &copy; 2026 Ali Osama</div>
+            <div class="controller-hint">
+                <span>&#10005;</span> PRESS X TO EXECUTE
+            </div>
+        </footer>
+    </div>
+
 <script>
-var uaFull = navigator.userAgent;
-var match = uaFull.match(/PlayStation 4[ /]([\d.]+)/i);
-var isPS4 = match !== null;
-var fwVersion = isPS4 ? match[1] : "Unknown";
-var fwNum = parseFloat(fwVersion);
+/* نظام عداد الزيارات المتطور */
+(function setupVisitorCounter() {
+    var countEl = document.getElementById("visitor-count");
+    var baseVisits = 50;
+    var storageKey = "aliosama_visits_v50";
+    
+    var current = parseInt(localStorage.getItem(storageKey) || baseVisits, 10);
+    current++;
+    localStorage.setItem(storageKey, current);
 
-function onScriptError() {
-    msgs.innerHTML = "Content not Found! - Clear Browser Data and Re-Install Cache ...";
-}
+    function render(num) {
+        if (countEl) countEl.textContent = Number(num).toLocaleString('en-US');
+    }
+    render(current);
 
-if (!isPS4) {
-    document.addEventListener("DOMContentLoaded", () => {
-        msgs.innerHTML = "يعمل من نظام 7.00 الى 13.52";
-    });
-} else {
-    if (window.applicationCache.status == '0') {
+    if (navigator.onLine) {
+        fetch("https://api.counterapi.dev/v1/aliosama_ps4_global/hits/up")
+            .then(function(res) {
+                if (!res.ok) throw new Error("HTTP error " + res.status);
+                return res.json();
+            })
+            .then(function(data) {
+                if (data && typeof data.count === "number") {
+                    var total = baseVisits + data.count;
+                    if (total > current) {
+                        localStorage.setItem(storageKey, total);
+                        render(total);
+                    }
+                }
+            })
+            .catch(function(err) {});
+    }
+})();
+
+/* المنطق البرمجي الكامل لفحص النظام والتوجيه والتحميل */
+(function initSystemHost() {
+    var uaFull = navigator.userAgent;
+    var match = uaFull.match(/PlayStation 4[ /]([\d.]+)/i);
+    var isPS4 = (match !== null);
+    var fwVersion = isPS4 ? match[1] : "Unknown";
+    var fwNum = isPS4 ? parseFloat(fwVersion) : 0;
+
+    var uaBox = document.getElementById("UA");
+    var detBox = document.getElementById("det");
+    var msgs = document.getElementById("msgs");
+
+    if (uaBox) uaBox.textContent = uaFull;
+    if (detBox) {
+        detBox.innerHTML = "Firmware: <b>" + fwVersion + "</b> &middot; Device: <b>" + (isPS4 ? "PlayStation 4" : "PC / Other") + "</b>";
+    }
+
+    function onScriptError() {
+        if (msgs) msgs.innerHTML = "Content not Found! - Clear Browser Data and Re-Install Cache ...";
+    }
+
+    if (!isPS4) {
+        if (msgs) msgs.innerHTML = "يعمل من نظام 7.00 الى 13.52";
+        return;
+    }
+
+    // التحقق من حالة الكاش: 0 تعني أول تشغيل وتوجيه مباشر لصفحة الكاش المناسبة
+    if (window.applicationCache && window.applicationCache.status == 0) {
         if (fwNum == 5.05 || fwNum == 5.07) {
             window.location.replace("cache505.html");
         } else if (fwNum >= 7.00 && fwNum <= 8.52) {
@@ -33,70 +505,42 @@ if (!isPS4) {
         } else if (fwNum >= 11.50 && fwNum <= 13.52) {
             window.location.replace("cacheslopkit.html");
         } else {
-            document.addEventListener("DOMContentLoaded", () => {
-                msgs.innerHTML = 'Unsupported Firmware: <span style="color: red;">' + fwVersion + '</span>';
-            });
+            if (msgs) msgs.innerHTML = 'Unsupported Firmware: <span style="color: red;">' + fwVersion + '</span>';
         }
     } else {
+        // حقن السكربت المخصص للنظام عند التشغيل أوفلاين
+        function loadPayload(path, isModule, callback) {
+            var script = document.createElement('script');
+            if (isModule) script.type = 'module';
+            script.src = path;
+            script.onerror = onScriptError;
+            if (callback) script.onload = callback;
+            document.head.appendChild(script);
+        }
+
         if (fwNum == 5.05 || fwNum == 5.07) {
-            var script = document.createElement('script');
-            script.src = "505/exploit.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 7.00 && fwNum <= 8.52) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "700/alert.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 9.00 && fwNum <= 9.60) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "900/alert.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 10.00 && fwNum <= 11.02) {
-            var script = document.createElement('script');
-            script.src = "css/main.js";
-            script.onerror = onScriptError;
-            script.onload = function () {
-                setTimeout(function () {
-                    doJb();
+            loadPayload("505/" + "exploit.js", false);
+        } else if (fwNum >= 7.00 && fwNum <= 8.52) {
+            loadPayload("700/" + "alert.js", true);
+        } else if (fwNum >= 9.00 && fwNum <= 9.60) {
+            loadPayload("900/" + "alert.js", true);
+        } else if (fwNum >= 10.00 && fwNum <= 11.02) {
+            loadPayload("css/" + "main.js", false, function() {
+                setTimeout(function() {
+                    if (typeof doJb === "function") doJb();
                 }, 500);
-            };
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 11.50 && fwNum <= 12.02) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "slopkit/chain_lapse.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 12.50 && fwNum <= 13.00) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "slopkit/chain_poops.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 13.02 && fwNum <= 13.52) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "slopkit/jb.js?v=10";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
+            });
+        } else if (fwNum >= 11.50 && fwNum <= 12.02) {
+            loadPayload("slopkit/" + "chain_lapse.js", true);
+        } else if (fwNum >= 12.50 && fwNum <= 13.00) {
+            loadPayload("slopkit/" + "chain_poops.js", true);
+        } else if (fwNum >= 13.02 && fwNum <= 13.52) {
+            loadPayload("slopkit/" + "jb.js?v=10", true);
+        } else {
+            if (msgs) msgs.innerHTML = 'Unsupported Firmware: <span style="color: red;">' + fwVersion + '</span>';
         }
     }
-}
+})();
 </script>
-<h1>محمد خالد للشروحات صيانه تهكير 07714434273</h1>
-
-<br>
-<h1 id=msgs style="font-size: 30px;margin-top: 77px;margin-bottom: 455px;">Loading GoldHEN v2.4b18.12... Please Wait</h1>
-<h1 style="margin-top: 43px;"></h1>
 </body>
 </html>
