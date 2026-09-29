@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dev Ali Osama / Host Manager</title>
+    <title>المطور علي أسامة / 07749932347</title>
     <style>
         :root {
             --neon-blue: #00f0ff;
@@ -130,13 +130,11 @@
         }
 
         .sub-tagline {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-sub) !important;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 15px;
             font-weight: 600;
-            direction: ltr;
         }
 
         .dev-badge-wrapper {
@@ -159,7 +157,7 @@
             text-decoration: none;
             font-weight: 800;
             font-size: 0.95rem;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             direction: ltr;
         }
 
@@ -243,11 +241,9 @@
         }
 
         .visitor-sub {
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             color: var(--text-sub);
-            font-family: monospace;
-            direction: ltr;
-            text-align: right;
+            letter-spacing: 0.5px;
         }
 
         .visitor-stats {
@@ -270,7 +266,6 @@
             font-size: 0.75rem;
             color: var(--text-sub);
             font-weight: 700;
-            letter-spacing: 1px;
         }
 
         .telemetry-box {
@@ -296,8 +291,6 @@
         #det {
             font-size: 0.85rem;
             color: var(--text-sub);
-            font-family: monospace;
-            direction: ltr;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             padding-top: 10px;
         }
@@ -342,15 +335,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.75rem;
-            color: #475569;
-            direction: ltr;
+            font-size: 0.8rem;
+            color: #64748b;
         }
 
         .controller-hint {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             color: var(--neon-blue);
             font-weight: bold;
         }
@@ -380,16 +372,16 @@
         <header class="site-header">
             <div class="header-content">
                 <div class="logo-frame">
-                    <img src="logo.jpg" alt="Dev Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('.logo-frame').style.display='none';">
+                    <img src="logo.jpg" alt="شعار المطور" class="header-logo" onerror="this.style.display='none'; document.querySelector('.logo-frame').style.display='none';">
                 </div>
 
                 <h1 class="main-title">المطور علي أسامة</h1>
-                <p class="sub-tagline">Multi-Firmware Architecture (5.05 - 13.52)</p>
+                <p class="sub-tagline">دعم التحديثات المتعددة (5.05 - 13.52)</p>
 
                 <div class="dev-badge-wrapper">
                     <div class="dev-badge">
                         <div class="dot"></div>
-                        <a href="https://t.me/BBTBB" target="_blank">Tele : @BBTBB • 07749932347</a>
+                        <a href="https://t.me/BBTBB" target="_blank">USER : @BBTBB • NM : 07749932347</a>
                     </div>
                 </div>
             </div>
@@ -403,30 +395,30 @@
                 </div>
                 <div class="visitor-titles">
                     <span class="visitor-title">إجمالي الزيارات</span>
-                    <span class="visitor-sub">TOTAL VISITS COUNTER</span>
+                    <span class="visitor-sub">عداد الزيارات الإجمالي</span>
                 </div>
             </div>
             <div class="visitor-stats">
                 <span id="visitor-count">50</span>
-                <span class="visitor-unit">HITS</span>
+                <span class="visitor-unit">زيارة</span>
             </div>
         </div>
 
         <!-- صندوق معلومات المتصفح والبيئة -->
         <div class="telemetry-box">
-            <div id="UA">Detecting system environment...</div>
-            <div id="det">Awaiting telemetry...</div>
+            <div id="UA">جارٍ فحص بيئة النظام...</div>
+            <div id="det">بانتظار قراءة البيانات...</div>
         </div>
 
         <!-- صندوق عرض الحالة والرسائل -->
         <div class="action-dock">
-            <h1 id="msgs">Loading System Core... Please Wait</h1>
+            <h1 id="msgs">جارٍ تحميل نواة النظام... يرجى الانتظار</h1>
         </div>
 
         <footer class="hud-footer">
-            <div>HOST CORE v13.52 &middot; &copy; 2026 Ali Osama</div>
+            <div>منظومة المضيف الإصدار v13.52 &middot; &copy; 2026 علي أسامة</div>
             <div class="controller-hint">
-                <span>&#10005;</span> PRESS X TO EXECUTE
+                <span>&#10005;</span> اضغط X للتنفيذ
             </div>
         </footer>
     </div>
@@ -471,7 +463,7 @@
     var uaFull = navigator.userAgent;
     var match = uaFull.match(/PlayStation 4[ /]([\d.]+)/i);
     var isPS4 = (match !== null);
-    var fwVersion = isPS4 ? match[1] : "Unknown";
+    var fwVersion = isPS4 ? match[1] : "غير معروف";
     var fwNum = isPS4 ? parseFloat(fwVersion) : 0;
 
     var uaBox = document.getElementById("UA");
@@ -480,11 +472,11 @@
 
     if (uaBox) uaBox.textContent = uaFull;
     if (detBox) {
-        detBox.innerHTML = "Firmware: <b>" + fwVersion + "</b> &middot; Device: <b>" + (isPS4 ? "PlayStation 4" : "PC / Other") + "</b>";
+        detBox.innerHTML = "إصدار النظام: <b>" + fwVersion + "</b> &middot; الجهاز: <b>" + (isPS4 ? "بلايستيشن 4" : "كمبيوتر / جهاز آخر") + "</b>";
     }
 
     function onScriptError() {
-        if (msgs) msgs.innerHTML = "Content not Found! - Clear Browser Data and Re-Install Cache ...";
+        if (msgs) msgs.innerHTML = "لم يتم العثور على الملفات! - امسح بيانات المتصفح وأعد تثبيت الكاش...";
     }
 
     if (!isPS4) {
@@ -505,7 +497,7 @@
         } else if (fwNum >= 11.50 && fwNum <= 13.52) {
             window.location.replace("cacheslopkit.html");
         } else {
-            if (msgs) msgs.innerHTML = 'Unsupported Firmware: <span style="color: red;">' + fwVersion + '</span>';
+            if (msgs) msgs.innerHTML = 'إصدار غير مدعوم: <span style="color: red;">' + fwVersion + '</span>';
         }
     } else {
         // حقن السكربت المخصص للنظام عند التشغيل أوفلاين
@@ -537,7 +529,7 @@
         } else if (fwNum >= 13.02 && fwNum <= 13.52) {
             loadPayload("slopkit/" + "jb.js?v=10", true);
         } else {
-            if (msgs) msgs.innerHTML = 'Unsupported Firmware: <span style="color: red;">' + fwVersion + '</span>';
+            if (msgs) msgs.innerHTML = 'إصدار غير مدعوم: <span style="color: red;">' + fwVersion + '</span>';
         }
     }
 })();
