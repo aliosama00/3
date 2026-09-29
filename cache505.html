@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html manifest="505.manifest">
+<head>
+    <meta charset="utf-8">
+    <title>Caching 5.05</title>
+    <style>
+        body { background: #05070d; color: #00f0ff; text-align: center; font-family: sans-serif; padding-top: 15%; }
+        .bar { width: 60%; height: 10px; background: #111; margin: 20px auto; border-radius: 5px; overflow: hidden; border: 1px solid #00f0ff; }
+        .fill { width: 0%; height: 100%; background: #00f0ff; transition: width 0.3s; }
+    </style>
+</head>
+<body>
+    <h2 id="msg">جاري تثبيت الكاش لإصدار 5.05...</h2>
+    <div class="bar"><div id="progress" class="fill"></div></div>
+
+    <script>
+        var ac = window.applicationCache;
+        var p = document.getElementById("progress");
+        var m = document.getElementById("msg");
+
+        ac.addEventListener("progress", function(e) {
+            if (e.total) {
+                var percent = Math.round((e.loaded / e.total) * 100);
+                p.style.width = percent + "%";
+                m.textContent = "جاري الحفظ للأوفلاين: " + percent + "%";
+            }
+        });
+
+        ac.addEventListener("cached", function() {
+            m.textContent = "تم التثبيت بنجاح! يتم التحويل الآن...";
+            setTimeout(function() { window.location.replace("index.html"); }, 1500);
+        });
+
+        ac.addEventListener("noupdate", function() {
+            window.location.replace("index.html");
+        });
+    </script>
+</body>
+</html>
