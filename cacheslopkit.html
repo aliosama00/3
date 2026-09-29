@@ -1,23 +1,338 @@
 <!DOCTYPE html>
-<html manifest="slopkit.manifest">
+<html lang="ar" dir="rtl" manifest="slopkit.manifest">
 <head>
-<title>محمد خالد للشروحات صيانه تهكير 07714434273</title>
-<link rel="stylesheet" href="../style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dev Ali Osama / تثبيت ذاكرة التخزين المؤقت</title>
+    <style>
+        :root {
+            --neon-blue: #00f0ff;
+            --ps-blue: #0070d1;
+            --neon-glow: rgba(0, 240, 255, 0.4);
+            --bg-dark: #05070d;
+            --card-bg: rgba(10, 15, 29, 0.85);
+            --border-line: rgba(0, 240, 255, 0.25);
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --warning: #ffb703;
+            --danger: #ff0055;
+            --success: #00ff88;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans Arabic', sans-serif;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 10%, rgba(0, 112, 209, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 50% 90%, rgba(0, 240, 255, 0.1) 0%, transparent 60%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 15px;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        .hud-container {
+            width: 100%;
+            max-width: 760px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-line);
+            border-radius: 24px;
+            padding: 35px 25px;
+            position: relative;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.85),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 0 25px rgba(0, 240, 255, 0.15);
+            text-align: center;
+        }
+
+        .hud-container::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: 50px; right: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        header, .site-header {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            margin: 0 0 20px 0 !important;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-frame {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-frame::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px dashed rgba(0, 240, 255, 0.6);
+            animation: rotateRing 15s linear infinite;
+        }
+
+        @keyframes rotateRing {
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-logo {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-glow);
+            z-index: 2;
+        }
+
+        .main-title {
+            font-size: 1.9rem;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            color: #ffffff !important;
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+            margin-bottom: 8px;
+        }
+
+        .sub-tagline {
+            font-size: 0.8rem;
+            color: var(--text-sub) !important;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-weight: 600;
+            direction: ltr;
+        }
+
+        .dev-badge-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .dev-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(90deg, rgba(0, 112, 209, 0.3), rgba(0, 240, 255, 0.3)) !important;
+            border: 1px solid var(--neon-blue) !important;
+            padding: 8px 22px;
+            border-radius: 50px;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+        }
+
+        .dev-badge a {
+            color: #ffffff !important;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+            direction: ltr;
+        }
+
+        .dev-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--neon-blue);
+        }
+
+        /* شريط تقدم التثبيت النيوني */
+        .progress-box {
+            width: 100%;
+            background: rgba(3, 7, 18, 0.8);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 50px;
+            height: 14px;
+            margin: 25px 0 15px 0;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+            padding: 2px;
+            position: relative;
+        }
+
+        #progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--ps-blue), var(--neon-blue));
+            border-radius: 50px;
+            box-shadow: 0 0 12px var(--neon-blue);
+            transition: width 0.25s ease-out;
+        }
+
+        /* صندوق الرسائل التفاعلي */
+        .action-dock {
+            margin: 10px 0;
+        }
+
+        #msgs {
+            width: 100%;
+            padding: 22px 15px;
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: linear-gradient(180deg, #111827 0%, #0b0f19 100%);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+            display: block;
+        }
+
+        #msgs::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 12px var(--neon-blue);
+        }
+
+        .hud-footer {
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #475569;
+            direction: ltr;
+        }
+
+        .controller-hint {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+
+        .controller-hint span {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 1px solid var(--neon-blue);
+            border-radius: 50%;
+            line-height: 16px;
+            text-align: center;
+            font-size: 0.7rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-title { font-size: 1.4rem; }
+            .hud-container { padding: 25px 15px; }
+            #msgs { font-size: 1rem; padding: 16px 10px; }
+            .hud-footer { flex-direction: column; gap: 10px; }
+        }
+    </style>
 </head>
 <body>
-<script>
-history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
-function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));window.msgs.innerHTML="جارٍ تثبيت ذاكرة التخزين المؤقت دون اتصال بالإنترنت: " + Percent + "%";}
-function DisplayCacheProgress(){window.msgs.innerHTML="تم تثبيت ذاكرة التخزين المؤقت بنجاح. ✔";setTimeout(function(){window.msgs.innerHTML="الآن أغلق المتصفح وأعد فتحه...";},1500);}
-window.applicationCache.addEventListener("progress",DLProgress,false);
-window.applicationCache.oncached=function(e){DisplayCacheProgress();};
-window.applicationCache.onupdateready=function(e){DisplayCacheProgress();};
-window.applicationCache.onerror=function(e){window.msgs.innerHTML="Error Installing Cache! - Clear and Re-Open Your Browser ...";};
-</script>
-<h1>محمد خالد للشروحات صيانه تهكير 07714434273</h1>
 
-<br>
-<h1 id=msgs style="font-size: 30px;margin-top: 77px;margin-bottom: 455px;">جارٍ تثبيت ذاكرة التخزين المؤقت ...</h1>
-<h1 style="margin-top: 43px;"></h1>
+    <div class="hud-container">
+        <header class="site-header">
+            <div class="header-content">
+                <div class="logo-frame">
+                    <img src="logo.jpg" alt="Dev Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('.logo-frame').style.display='none';">
+                </div>
+
+                <h1 class="main-title">المطور علي أسامة</h1>
+                <p class="sub-tagline">Slopkit Offline Cache Installer (11.50 - 13.52)</p>
+
+                <div class="dev-badge-wrapper">
+                    <div class="dev-badge">
+                        <div class="dot"></div>
+                        <a href="https://t.me/BBTBB" target="_blank">Tele : @BBTBB • 07733340622 </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- شريط النيون لنسبة التنزيل -->
+        <div class="progress-box">
+            <div id="progress-fill"></div>
+        </div>
+
+        <!-- صندوق عرض الحالة والرسائل الأساسي -->
+        <div class="action-dock">
+            <h1 id="msgs">جارٍ تثبيت ذاكرة التخزين المؤقت ...</h1>
+        </div>
+
+        <footer class="hud-footer">
+            <div>HOST CORE v13.52 &middot; &copy; 2026 Ali Osama</div>
+            <div class="controller-hint">
+                <span>&#10005;</span> OFFLINE CACHE SYSTEM
+            </div>
+        </footer>
+    </div>
+
+<script>
+history.replaceState(null, null, 'index.html');
+var histlength = history.length;
+history.go(-histlength);
+
+var pFill = document.getElementById("progress-fill");
+
+function DLProgress(e) {
+    var Percent = (Math.round(e.loaded / e.total * 100));
+    window.msgs.innerHTML = "جارٍ تثبيت ذاكرة التخزين المؤقت دون اتصال بالإنترنت: " + Percent + "%";
+    if (pFill) {
+        pFill.style.width = Percent + "%";
+    }
+}
+
+function DisplayCacheProgress() {
+    window.msgs.innerHTML = "تم تثبيت ذاكرة التخزين المؤقت بنجاح. ✔";
+    if (pFill) {
+        pFill.style.width = "100%";
+    }
+    setTimeout(function() {
+        window.msgs.innerHTML = "الآن أغلق المتصفح وأعد فتحه...";
+    }, 1500);
+}
+
+window.applicationCache.addEventListener("progress", DLProgress, false);
+window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
+window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
+window.applicationCache.onerror = function(e) {
+    window.msgs.innerHTML = "Error Installing Cache! - Clear and Re-Open Your Browser ...";
+};
+</script>
 </body>
 </html>
