@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dev Ali Osama / تثبيت ذاكرة التخزين المؤقت</title>
+    <title>المطور علي أسامة / تثبيت ذاكرة التخزين المؤقت</title>
     <style>
         :root {
             --neon-blue: #00f0ff;
@@ -130,13 +130,11 @@
         }
 
         .sub-tagline {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-sub) !important;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 15px;
             font-weight: 600;
-            direction: ltr;
         }
 
         .dev-badge-wrapper {
@@ -159,7 +157,7 @@
             text-decoration: none;
             font-weight: 800;
             font-size: 0.95rem;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             direction: ltr;
         }
 
@@ -231,15 +229,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.75rem;
-            color: #475569;
-            direction: ltr;
+            font-size: 0.8rem;
+            color: #64748b;
         }
 
         .controller-hint {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             color: var(--neon-blue);
             font-weight: bold;
         }
@@ -273,12 +270,12 @@
                 </div>
 
                 <h1 class="main-title">المطور علي أسامة</h1>
-                <p class="sub-tagline">Slopkit Offline Cache Installer (11.50 - 13.52)</p>
+                <p class="sub-tagline">تثبيت ملفات التشغيل دون إنترنت (11.50 - 13.52)</p>
 
                 <div class="dev-badge-wrapper">
                     <div class="dev-badge">
                         <div class="dot"></div>
-                        <a href="https://t.me/BBTBB" target="_blank">Tele : @BBTBB • 07733340622 </a>
+                        <a href="https://t.me/BBTBB" target="_blank">تليجرام : @BBTBB • 07733340622</a>
                     </div>
                 </div>
             </div>
@@ -291,13 +288,13 @@
 
         <!-- صندوق عرض الحالة والرسائل الأساسي -->
         <div class="action-dock">
-            <h1 id="msgs">جارٍ تثبيت ذاكرة التخزين المؤقت ...</h1>
+            <h1 id="msgs">جارٍ بدء تثبيت ذاكرة التخزين المؤقت...</h1>
         </div>
 
         <footer class="hud-footer">
-            <div>HOST CORE v13.52 &middot; &copy; 2026 Ali Osama</div>
+            <div>منظومة المضيف &middot; &copy; 2026 علي أسامة</div>
             <div class="controller-hint">
-                <span>&#10005;</span> OFFLINE CACHE SYSTEM
+                <span>&#10005;</span> نظام العمل دون إنترنت
             </div>
         </footer>
     </div>
@@ -311,19 +308,19 @@ var pFill = document.getElementById("progress-fill");
 
 function DLProgress(e) {
     var Percent = (Math.round(e.loaded / e.total * 100));
-    window.msgs.innerHTML = "جارٍ تثبيت ذاكرة التخزين المؤقت دون اتصال بالإنترنت: " + Percent + "%";
+    window.msgs.innerHTML = "جارٍ حفظ الملفات للاستخدام دون إنترنت: " + Percent + "%";
     if (pFill) {
         pFill.style.width = Percent + "%";
     }
 }
 
 function DisplayCacheProgress() {
-    window.msgs.innerHTML = "تم تثبيت ذاكرة التخزين المؤقت بنجاح. ✔";
+    window.msgs.innerHTML = "تم حفظ التخزين المؤقت بنجاح! ✔";
     if (pFill) {
         pFill.style.width = "100%";
     }
     setTimeout(function() {
-        window.msgs.innerHTML = "الآن أغلق المتصفح وأعد فتحه...";
+        window.msgs.innerHTML = "الآن قم بإغلاق المتصفح وإعادة فتحه...";
     }, 1500);
 }
 
@@ -331,7 +328,7 @@ window.applicationCache.addEventListener("progress", DLProgress, false);
 window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
 window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
 window.applicationCache.onerror = function(e) {
-    window.msgs.innerHTML = "Error Installing Cache! - Clear and Re-Open Your Browser ...";
+    window.msgs.innerHTML = "حدث خطأ أثناء تثبيت الكاش! - امسح بيانات المتصفح وأعد فتحه...";
 };
 </script>
 </body>
