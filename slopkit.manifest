@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v3.0 - Ali Osama Slopkit Stable
+# v3.5 - Ali Osama Final Fix
 
 CACHE:
 index.html
@@ -9,8 +9,10 @@ goldhen_2.4b18.12.bin
 slopkit/chain_lapse.js
 slopkit/chain_poops.js
 slopkit/core.js
+slopkit/core.js?v=10
 slopkit/int64.js
 slopkit/jb.js
+slopkit/jb.js?v=10
 slopkit/mem.js
 slopkit/ps4_offsets.js
 slopkit/rpc_worker.js
