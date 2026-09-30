@@ -266,7 +266,7 @@
         <header class="site-header">
             <div class="header-content">
                 <div class="logo-frame">
-                    <img src="logo.jpg" alt="Dev Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('.logo-frame').style.display='none';">
+                    <img src="logo.jpg" alt="شعار المطور" class="header-logo" onerror="this.style.display='none'; document.querySelector('.logo-frame').style.display='none';">
                 </div>
 
                 <h1 class="main-title">المطور علي أسامة</h1>
@@ -275,7 +275,7 @@
                 <div class="dev-badge-wrapper">
                     <div class="dev-badge">
                         <div class="dot"></div>
-                        <a href="https://t.me/BBTBB" target="_blank">تليجرام : @BBTBB • 07733340622</a>
+                        <a href="https://t.me/BBTBB" target="_blank">تليجرام : @BBTBB • 07749932347</a>
                     </div>
                 </div>
             </div>
@@ -300,35 +300,33 @@
     </div>
 
 <script>
-history.replaceState(null, null, 'index.html');
-var histlength = history.length;
-history.go(-histlength);
-
 var pFill = document.getElementById("progress-fill");
+var msgs = document.getElementById("msgs");
 
 function DLProgress(e) {
-    var Percent = (Math.round(e.loaded / e.total * 100));
-    window.msgs.innerHTML = "جارٍ حفظ الملفات للاستخدام دون إنترنت: " + Percent + "%";
-    if (pFill) {
-        pFill.style.width = Percent + "%";
+    if (e.total) {
+        var Percent = Math.round((e.loaded / e.total) * 100);
+        msgs.innerHTML = "جارٍ حفظ الملفات للاستخدام دون إنترنت: " + Percent + "%";
+        if (pFill) pFill.style.width = Percent + "%";
     }
 }
 
 function DisplayCacheProgress() {
-    window.msgs.innerHTML = "تم حفظ التخزين المؤقت بنجاح! ✔";
-    if (pFill) {
-        pFill.style.width = "100%";
-    }
+    msgs.innerHTML = "تم حفظ التخزين المؤقت بنجاح! يتم التحويل الآن... ✔";
+    if (pFill) pFill.style.width = "100%";
     setTimeout(function() {
-        window.msgs.innerHTML = "الآن قم بإغلاق المتصفح وإعادة فتحه...";
+        window.location.replace("index.html");
     }, 1500);
 }
 
 window.applicationCache.addEventListener("progress", DLProgress, false);
 window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
 window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
+window.applicationCache.onnoupdate = function(e) {
+    window.location.replace("index.html");
+};
 window.applicationCache.onerror = function(e) {
-    window.msgs.innerHTML = "حدث خطأ أثناء تثبيت الكاش! - امسح بيانات المتصفح وأعد فتحه...";
+    msgs.innerHTML = "حدث خطأ أثناء تثبيت الكاش! - امسح بيانات المتصفح وأعد المحاولة...";
 };
 </script>
 </body>
